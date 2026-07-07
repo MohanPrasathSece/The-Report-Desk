@@ -228,7 +228,7 @@ function Enquiry() {
           streakWidth={2.5}
           streakLength={1.8}
           glow={1}
-          density={0.4}
+          density={0.3}
           twinkle={1}
           zoom={2}
           backgroundGlow={1}
