@@ -224,11 +224,11 @@ function Enquiry() {
           colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
           backgroundColor="#0A29FF"
           speed={0.4}
-          streakCount={1}
+          streakCount={2}
           streakWidth={2.5}
           streakLength={1.8}
           glow={1}
-          density={0.2}
+          density={0.4}
           twinkle={1}
           zoom={2}
           backgroundGlow={1}
