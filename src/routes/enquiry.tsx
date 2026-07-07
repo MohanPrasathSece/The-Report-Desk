@@ -34,7 +34,7 @@ const submitLeadToCRM = createServerFn({ method: "POST" })
     const formattedPhone = formatFullPhoneNumber(data.phone, data.countryCode);
 
     const payload = {
-      country_name: "cy", // Hardcode to Cyprus
+      country_name: (data.countryCode || "cy").toLowerCase(),
       description: data.message || "Signup Lead",
       phone: formattedPhone,
       email: data.email.toLowerCase().trim(),
@@ -66,9 +66,22 @@ const submitLeadToCRM = createServerFn({ method: "POST" })
       const responseText = await response.text();
       console.info("[CRM RESPONSE]", response.status, responseText);
 
+      let parsedBody: any = null;
+      try {
+        parsedBody = JSON.parse(responseText);
+      } catch {
+        // plain text
+      }
+
       const alreadyExists = responseText.toLowerCase().includes("already exist");
-      if (!response.ok && !alreadyExists) {
-        return { success: false, error: responseText || "CRM rejected lead" };
+      const crmAppError = parsedBody?.error && !alreadyExists;
+
+      if ((!response.ok || crmAppError) && !alreadyExists) {
+        let errMsg = parsedBody?.error || responseText || "CRM rejected lead";
+        if (errMsg.toLowerCase().includes("lead is not valid")) {
+          errMsg = "The phone number or email format appears to be incorrect. Please make sure your phone number has the correct number of digits and corresponds to the selected country code.";
+        }
+        return { success: false, error: errMsg };
       }
 
       // Increment successful lead count in Vercel Blob
@@ -215,7 +228,11 @@ function Enquiry() {
         setSubmitted(true);
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        setServerError(res.error || "Failed to submit lead. Please try again.");
+        let errMsg = res.error || "Failed to submit lead. Please try again.";
+        if (errMsg.toLowerCase().includes("lead is not valid")) {
+          errMsg = "The phone number or email format appears to be incorrect. Please make sure your phone number has the correct number of digits and corresponds to the selected country code.";
+        }
+        setServerError(errMsg);
       }
     } catch (err: any) {
       setServerError("An unexpected network error occurred.");

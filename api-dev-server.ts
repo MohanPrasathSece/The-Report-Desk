@@ -71,9 +71,9 @@ const server = http.createServer(async (req, res) => {
   if (url === "/api/submit-lead" && req.method === "POST") {
     try {
       const body = await parseBody(req);
-      const { name, email, phone, countryCode, message } = body as {
+      const { name, email, phone, countryCode, budget, message } = body as {
         name: string; email: string; phone: string;
-        countryCode: string; message?: string;
+        countryCode: string; budget?: string; message?: string;
       };
 
       const [first_name, ...rest] = (name || "Unknown").trim().split(" ");
@@ -81,7 +81,7 @@ const server = http.createServer(async (req, res) => {
       const formattedPhone = formatFullPhoneNumber(phone || "", countryCode || "CY");
 
       const payload = {
-        country_name: "cy",
+        country_name: (countryCode || "cy").toLowerCase(),
         description: message || "Signup Lead",
         phone: formattedPhone,
         email: email.toLowerCase().trim(),
@@ -89,7 +89,7 @@ const server = http.createServer(async (req, res) => {
         last_name,
         custom_fields: {
           Source_ID: "website",
-          How_Much_Invested: "0",
+          How_Much_Invested: budget || "0",
           Outline_Your_Case: message || "",
         },
       };
@@ -125,7 +125,10 @@ const server = http.createServer(async (req, res) => {
       const crmAppError = parsedBody?.error && !alreadyExists;
 
       if ((!crmRes.ok || crmAppError) && !alreadyExists) {
-        const errMsg = parsedBody?.error || responseText || "CRM rejected lead";
+        let errMsg = parsedBody?.error || responseText || "CRM rejected lead";
+        if (errMsg.toLowerCase().includes("lead is not valid")) {
+          errMsg = "The phone number or email format appears to be incorrect. Please make sure your phone number has the correct number of digits and corresponds to the selected country code.";
+        }
         console.warn(`[CRM] Lead rejected: ${errMsg}`);
         return json(res, 200, { success: false, error: errMsg });
       }

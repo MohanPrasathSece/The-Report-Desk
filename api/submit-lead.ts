@@ -22,7 +22,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const formattedPhone = formatFullPhoneNumber(phone || "", countryCode || "CY");
 
   const payload = {
-    country_name: "cy",
+    country_name: (countryCode || "cy").toLowerCase(),
     description: message || "Signup Lead",
     phone: formattedPhone,
     email: email.toLowerCase().trim(),
@@ -54,9 +54,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const responseText = await response.text();
     console.info("[CRM RESPONSE]", response.status, responseText);
 
+    let parsedBody: any = null;
+    try {
+      parsedBody = JSON.parse(responseText);
+    } catch {
+      // plain text
+    }
+
     const alreadyExists = responseText.toLowerCase().includes("already exist");
-    if (!response.ok && !alreadyExists) {
-      return res.status(200).json({ success: false, error: responseText || "CRM rejected lead" });
+    const crmAppError = parsedBody?.error && !alreadyExists;
+
+    if ((!response.ok || crmAppError) && !alreadyExists) {
+      let errMsg = parsedBody?.error || responseText || "CRM rejected lead";
+      if (errMsg.toLowerCase().includes("lead is not valid")) {
+        errMsg = "The phone number or email format appears to be incorrect. Please make sure your phone number has the correct number of digits and corresponds to the selected country code.";
+      }
+      return res.status(200).json({ success: false, error: errMsg });
     }
 
     // Increment successful lead count in Vercel Blob

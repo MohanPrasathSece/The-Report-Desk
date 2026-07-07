@@ -215,7 +215,11 @@ export default function Enquiry() {
           setSubmitted(true);
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          setServerError(data.error || "Failed to submit. Please try again.");
+          let errMsg = data.error || "Failed to submit. Please try again.";
+          if (errMsg.toLowerCase().includes("lead is not valid")) {
+            errMsg = "The phone number or email format appears to be incorrect. Please make sure your phone number has the correct number of digits and corresponds to the selected country code.";
+          }
+          setServerError(errMsg);
         }
       } catch (err) {
         console.error("[FORM] Network error:", err);
