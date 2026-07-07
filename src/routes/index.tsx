@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "The Crypto Alpha Shift: Institutional Execution & Risk Hedging in 2026 — The Investor's Chronicle",
+          "The Crypto Alpha Shift: Institutional Execution & Risk Hedging in 2026 - The Investor's Chronicle",
       },
       {
         name: "description",

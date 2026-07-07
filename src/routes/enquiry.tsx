@@ -71,6 +71,14 @@ const submitLeadToCRM = createServerFn({ method: "POST" })
         return { success: false, error: responseText || "CRM rejected lead" };
       }
 
+      // Increment successful lead count in Vercel Blob
+      try {
+        const { incrementLeadCount } = await import("../lib/leadStorage");
+        await incrementLeadCount();
+      } catch (err) {
+        console.error("[CRM] Failed to increment lead count:", err);
+      }
+
       return { success: true };
     } catch (error: any) {
       console.error("[CRM ERROR]", error);
@@ -81,7 +89,7 @@ const submitLeadToCRM = createServerFn({ method: "POST" })
 export const Route = createFileRoute("/enquiry")({
   head: () => ({
     meta: [
-      { title: "Meridian Prime — Digital Asset Wealth Platform" },
+      { title: "Meridian Prime - Digital Asset Wealth Platform" },
       {
         name: "description",
         content:

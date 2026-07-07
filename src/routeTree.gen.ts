@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LeadsCountRouteImport } from './routes/leads-count'
 import { Route as EnquiryRouteImport } from './routes/enquiry'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsCountRoute = LeadsCountRouteImport.update({
+  id: '/leads-count',
+  path: '/leads-count',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnquiryRoute = EnquiryRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/enquiry': typeof EnquiryRoute
+  '/leads-count': typeof LeadsCountRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/enquiry': typeof EnquiryRoute
+  '/leads-count': typeof LeadsCountRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/enquiry': typeof EnquiryRoute
+  '/leads-count': typeof LeadsCountRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/enquiry' | '/sitemap.xml'
+  fullPaths: '/' | '/enquiry' | '/leads-count' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/enquiry' | '/sitemap.xml'
-  id: '__root__' | '/' | '/enquiry' | '/sitemap.xml'
+  to: '/' | '/enquiry' | '/leads-count' | '/sitemap.xml'
+  id: '__root__' | '/' | '/enquiry' | '/leads-count' | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EnquiryRoute: typeof EnquiryRoute
+  LeadsCountRoute: typeof LeadsCountRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads-count': {
+      id: '/leads-count'
+      path: '/leads-count'
+      fullPath: '/leads-count'
+      preLoaderRoute: typeof LeadsCountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enquiry': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EnquiryRoute: EnquiryRoute,
+  LeadsCountRoute: LeadsCountRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport

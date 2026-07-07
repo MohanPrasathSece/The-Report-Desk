@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Meridian Capital Review — Independent Analysis for Long-Term Investors" },
+      { title: "Meridian Capital Review - Independent Analysis for Long-Term Investors" },
       {
         name: "description",
         content:
