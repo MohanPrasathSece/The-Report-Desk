@@ -71,7 +71,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-zinc-955 selection:text-white antialiased" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Top Banner Bar */}
-      <div className="border-b border-zinc-200 bg-white py-2 text-xs text-zinc-500 font-medium">
+      <div className="hidden lg:block border-b border-zinc-200 bg-white py-2 text-xs text-zinc-500 font-medium">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 border-r border-zinc-200 pr-3.5">
@@ -104,9 +104,9 @@ export default function Index() {
       </div>
 
       {/* Large Brand Header Logo */}
-      <div className="relative pt-6 pb-6 md:pt-12 md:pb-6 text-center border-b border-zinc-200 px-4 sm:px-6">
+      <div className="relative pt-5 pb-5 md:pt-10 md:pb-6 text-center border-b border-zinc-200 px-4 sm:px-6">
         {/* Mobile Hamburger Menu Button */}
-        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center md:hidden">
+        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center lg:hidden">
           <button 
             onClick={() => setMobileMenuOpen(true)}
             className="p-1.5 -ml-1.5 rounded-md hover:bg-zinc-100 text-zinc-800 focus:outline-none cursor-pointer transition-colors"
@@ -116,16 +116,26 @@ export default function Index() {
           </button>
         </div>
 
-        <a href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="inline-block text-2xl sm:text-4xl md:text-5xl lg:text-6.5xl font-extrabold tracking-tight text-zinc-955 uppercase cursor-pointer px-8 md:px-0" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+        <a href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="inline-block text-xl sm:text-3xl md:text-5xl lg:text-6.5xl font-extrabold tracking-tight text-zinc-955 uppercase cursor-pointer px-12 md:px-0" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
           The Investor's Chronicle
         </a>
+
+        {/* Mobile Sign In Button */}
+        <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 flex items-center lg:hidden">
+          <a 
+            href={ENQUIRY}
+            className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-zinc-950 text-white px-2.5 py-1.5 rounded hover:bg-zinc-800 transition-colors"
+          >
+            Sign In
+          </a>
+        </div>
       </div>
 
       {/* Main Category Bar - Centered & Horizontal Scrollable on Mobile */}
-      <div className="border-b border-zinc-200 bg-white sticky top-0 z-30 shadow-sm md:shadow-none">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2.5 md:py-3">
+      <div className="border-b border-zinc-200 bg-white sticky top-0 z-30 shadow-sm lg:shadow-none">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2.5 lg:py-3">
           {/* Desktop Nav */}
-          <nav className="hidden md:flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs md:text-[13.5px] font-bold text-zinc-700 uppercase tracking-wider">
+          <nav className="hidden lg:flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs lg:text-[13.5px] font-bold text-zinc-700 uppercase tracking-wider">
             <a href="/" className="text-zinc-900 font-black border-b-2 border-zinc-955 pb-0.5 cursor-pointer">Home</a>
             <a href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-955 cursor-pointer">City</a>
             <a href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-955 cursor-pointer">Live</a>
@@ -139,7 +149,7 @@ export default function Index() {
             <a href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-955 cursor-pointer">Blogs</a>
           </nav>
           {/* Mobile Swipeable Nav */}
-          <nav className="md:hidden flex items-center gap-4 text-[11px] font-bold text-zinc-700 uppercase tracking-wider overflow-x-auto scrollbar-none whitespace-nowrap -mx-4 px-4">
+          <nav className="lg:hidden flex items-center gap-4 text-[11px] font-bold text-zinc-700 uppercase tracking-wider overflow-x-auto scrollbar-none whitespace-nowrap -mx-4 px-4">
             <a href="/" className="text-zinc-900 font-black border-b-2 border-zinc-955 pb-0.5 cursor-pointer shrink-0">Home</a>
             {["City", "Live", "India", "World", "Business", "Sports", "Cricket", "Entertainment", "Tech", "Blogs"].map((cat) => (
               <a key={cat} href={ENQUIRY} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-955 cursor-pointer shrink-0">{cat}</a>
@@ -198,7 +208,7 @@ export default function Index() {
           {/* Left Column: Main Editorial Article */}
           <article className="lg:col-span-8 space-y-6">
             <header className="space-y-3.5">
-              <h1 className="font-extrabold text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-zinc-950 tracking-tight" style={{ fontFamily: "'Merriweather', Georgia, serif" }}>
+              <h1 className="font-extrabold text-2xl sm:text-4xl md:text-5xl leading-[1.08] text-zinc-950 tracking-tight" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                 'The Crypto Alpha Shift': Institutional Execution & Risk Hedging in 2026
               </h1>
               <div className="text-[11.5px] text-zinc-455 font-medium flex flex-wrap items-center gap-2 border-y border-zinc-100 py-2">
@@ -229,7 +239,7 @@ export default function Index() {
             </header>
 
             {/* Main Hero Video */}
-            <div className="overflow-hidden rounded-xl border border-zinc-200 aspect-[9/16] md:aspect-[16/9] bg-black shadow-sm max-w-sm md:max-w-none mx-auto w-full max-h-[65vh] md:max-h-none flex items-center justify-center">
+            <div className="overflow-hidden rounded-xl border border-zinc-200 aspect-video bg-black shadow-sm max-w-2xl mx-auto w-full max-h-[35vh] sm:max-h-[45vh] md:max-h-none flex items-center justify-center">
               <video
                 src={video1}
                 controls
@@ -248,20 +258,20 @@ export default function Index() {
             </div>
 
             {/* Main Prose */}
-            <div className="prose prose-md max-w-none text-zinc-700 space-y-5 text-[14px] sm:text-[15.5px] md:text-[17px] leading-relaxed" style={{ fontFamily: "'Merriweather', Georgia, serif" }}>
+            <div className="prose prose-md max-w-none text-zinc-700 space-y-5 text-[14px] sm:text-[15.5px] md:text-[17px] leading-relaxed" style={{ fontFamily: "'Sora', sans-serif" }}>
               <p className="font-medium text-base sm:text-lg text-zinc-900 leading-relaxed">
                 <span className="font-bold text-zinc-950">LONDON:</span> Cryptocurrency markets in 2026 have shifted from speculative retail assets into a highly structured quantitative ecosystem. With zero-interest rate policies phased out globally, yield preservation and capital sustainability are the primary parameters guiding capital allocations.
               </p>
               <p>
                 According to recent transaction data, multi-signature custodial addresses hold over 40% of the active liquid supply, pointing to a steady accumulation phase. Systemic capital is moving away from leveraged derivative trades and instead flowing into decentralized, spot-backed liquidity feeds.
               </p>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                 1. Real-time Spot Sourcing Desks
               </h3>
               <p>
                 Underlying liquidity sourcing networks connect execution directly to major global spot liquidity channels. By routing allocations across deep order book matrices, institutions mitigate slippage and capture optimal pricing spreads even during high volatility market segments.
               </p>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                 2. Sourced Crypto Stories: How Strategic Allocations Changed Lives
               </h3>
               <p>
@@ -269,7 +279,7 @@ export default function Index() {
               </p>
 
               {/* Second Video */}
-              <div className="rounded-xl overflow-hidden border border-zinc-200 shadow bg-black aspect-[9/16] md:aspect-[16/9] max-w-sm md:max-w-none mx-auto w-full my-6 max-h-[65vh] md:max-h-none flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden border border-zinc-200 shadow bg-black aspect-video max-w-2xl mx-auto w-full my-6 max-h-[35vh] sm:max-h-[45vh] md:max-h-none flex items-center justify-center">
                 <video
                   src={video2}
                   controls
@@ -287,7 +297,7 @@ export default function Index() {
                 />
               </div>
 
-              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                 3. Yield Optimization & DCA Models
               </h3>
               <p>
@@ -296,7 +306,7 @@ export default function Index() {
               <p>
                 Unlike previous market regimes that relied on unsecured lending platforms, modern yields are generated via delta-neutral funding rate arbitrage. By offsetting spot acquisitions with short perpetual futures positions, desks secure structural yields independent of directional token volatility.
               </p>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-zinc-900 pt-3 border-b border-zinc-100 pb-1" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
                 4. Custodial Signers & Key Protection
               </h3>
               <p>
