@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 
 export default function Terms() {
+  useEffect(() => {
+    document.title = "Terms of Publication | The Report Desk";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Review the intellectual property rights, governing law, and disclaimer of investment advice for The Report Desk.");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-zinc-955 selection:text-white antialiased">
       {/* Top Banner Bar */}

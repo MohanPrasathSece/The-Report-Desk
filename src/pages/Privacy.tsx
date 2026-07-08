@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 
 export default function Privacy() {
+  useEffect(() => {
+    document.title = "Privacy Framework | The Report Desk";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Learn about the data privacy standards and cookies configuration governing your usage of The Report Desk.");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-zinc-955 selection:text-white antialiased">
       {/* Top Banner Bar */}

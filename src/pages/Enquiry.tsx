@@ -121,7 +121,11 @@ export default function Enquiry() {
 
   /* Update meta tags once */
   useEffect(() => {
-    document.title = "Meridian Capital - Digital Asset Wealth Platform";
+    document.title = "Meridian Capital | Digital Asset Wealth Platform";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Institutional-grade digital asset wealth platform. Contact our advisory board for portfolio structuring, execution management, and asset preservation.");
+    }
   }, []);
 
   /* Scroll listener for navbar */

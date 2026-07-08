@@ -6,7 +6,7 @@ import related4 from "@/assets/related-4.png";
 import recommended1 from "@/assets/recommended-1.png";
 import video1 from "@/assets/WhatsApp Video 2026-07-07 at 10.48.37.mp4";
 import video2 from "@/assets/WhatsApp Video 2026-07-07 at 10.48.38.mp4";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   X,
@@ -20,6 +20,14 @@ import {
 const ENQUIRY = "/enquiry";
 
 export default function Index() {
+  useEffect(() => {
+    document.title = "The Report Desk | Independent Market Analysis & Financial Insights";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "In-depth reporting on global markets, digital assets, sovereign wealth, macroeconomics, and the discipline of long-term investing.");
+    }
+  }, []);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const trendingTags = [
     "Ukraine Drone Attack",
