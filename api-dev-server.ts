@@ -6,8 +6,8 @@ import http from "http";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { formatFullPhoneNumber } from "./src/lib/phoneValidation.js";
-import { incrementLeadCount, getLeadCount } from "./src/lib/leadStorage.js";
+import { formatFullPhoneNumber } from "./api/_lib/phoneValidation.js";
+import { incrementLeadCount, getLeadCount } from "./api/_lib/leadStorage.js";
 
 // ── Load .env file ────────────────────────────────────────
 const __dir = dirname(fileURLToPath(import.meta.url));

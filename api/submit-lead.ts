@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { formatFullPhoneNumber } from "../src/lib/phoneValidation.js";
-import { incrementLeadCount } from "../src/lib/leadStorage.js";
+import { formatFullPhoneNumber } from "./_lib/phoneValidation.js";
+import { incrementLeadCount } from "./_lib/leadStorage.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
