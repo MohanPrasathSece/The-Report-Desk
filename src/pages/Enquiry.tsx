@@ -558,7 +558,7 @@ export default function Enquiry() {
                         Sending...
                       </>
                     ) : (
-                      <>Send Message <ArrowRight className="w-4 h-4" /></>
+                      <>Submit Enquiry <ArrowRight className="w-4 h-4" /></>
                     )}
                   </button>
                 </form>

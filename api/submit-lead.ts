@@ -49,6 +49,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   console.info("[CRM SUBMISSION PAYLOAD]", payload);
 
+  // Bypass SSL certificate errors for this specific CRM API (UNABLE_TO_VERIFY_LEAF_SIGNATURE)
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
   try {
     const response = await fetch(crmUrl, {
       method: "POST",
