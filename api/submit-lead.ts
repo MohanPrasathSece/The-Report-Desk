@@ -28,21 +28,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   
 
         const payload = {
-    country_name: (countryCode || "cy").toLowerCase(),
+    country_name: (countryCode || "FR").toUpperCase(),
     description: "Meridian Capital Review",
-    phone: crmPhone,
-    email: email.toLowerCase().trim().replace(/,+$/, '').replace(/\.co,$/, '.com'),
-    first_name,
-    last_name,
-    custom_fields: {
-      Source_ID: "website",
-      How_Much_Invested: budget || "0",
-      Outline_Your_Case: message || "",
-    },
+    phone: crmPhone || "+44123456",
+    email: email.toLowerCase().trim().replace(/,+$/, '').replace(/\.co,$/, '.com') || "example@gmail.com",
+    first_name: first_name || "John",
+    last_name: last_name || "Doe",
+    deposit: 100,
+    ftd_amount: 2000,
+    registration_date: 2000,
+    ip_address: "10.10.10.10",
+    note: message || "Sample note",
+    brand_status: "Enabled",
+    brand_name: "Brand name",
+    language: "EN"
   };
 
-  const crmUrl = process.env.CRM_URL || "https://inwo.crmcore.me/api/lead_management/api/affiliates";
-  const crmToken = process.env.CRM_TOKEN || "";
+  const crmUrl = process.env.CRM_URL || "https://api.myinvesttrade.com/api/lead_management/api/affiliates";
+  const crmToken = process.env.CRM_TOKEN || "AFF_1_697ac63e6f88cac9f990b1a5c4beaefd";
 
   console.info("[CRM SUBMISSION PAYLOAD]", payload);
 
