@@ -239,6 +239,14 @@ export default function Enquiry() {
           setServerError(errMsg);
         }
       } catch (err) {
+      const rawMsg = (err?.message || err?.toString() || "");
+      if (rawMsg.toLowerCase().includes("already exist") || rawMsg.toLowerCase().includes("already exists") || rawMsg.toLowerCase().includes("contacted")) {
+        toast.error("You have already contacted us pls wait");
+        if (typeof setError === 'function') setError("You have already contacted us pls wait");
+        setLoading(false);
+        return;
+      }
+
         console.error("[FORM] Network error:", err);
         setServerError("Network error — please check your connection and try again.");
       } finally {
