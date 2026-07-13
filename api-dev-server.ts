@@ -77,7 +77,7 @@ const server = http.createServer(async (req, res) => {
       };
 
       const [first_name, ...rest] = (name || "Unknown").trim().split(" ");
-      const last_name = rest.join(" ") || "Lead";
+      const last_name = rest.join(" ") || "";
       const formattedPhone = formatFullPhoneNumber(phone || "", countryCode || "CY");
       let crmPhone = formattedPhone;
       if (crmPhone.startsWith('+')) {

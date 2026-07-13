@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   };
 
   const [first_name, ...lastNameParts] = (name || "Unknown").trim().split(" ");
-  const last_name = lastNameParts.join(" ") || "Lead";
+  const last_name = lastNameParts.join(" ") || "";
 
   const formattedPhone = formatFullPhoneNumber(phone || "", countryCode || "CY");
   let crmPhone = formattedPhone;
