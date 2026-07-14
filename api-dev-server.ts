@@ -6,11 +6,13 @@ import http from "http";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { formatFullPhoneNumber } from "./api/_lib/phoneValidation.js";
-import { incrementLeadCount, getLeadCount } from "./api/_lib/leadStorage.js";
+import { formatFullPhoneNumber } from "./api/_lib/phoneValidation.ts";
+import { incrementLeadCount, getLeadCount } from "./api/_lib/leadStorage.ts";
+
+declare const fetch: any;
 
 // ── Load .env file ────────────────────────────────────────
-const __dir = dirname(fileURLToPath(import.meta.url));
+const __dir = dirname(fileURLToPath((import.meta as any).url));
 try {
   const raw = readFileSync(join(__dir, ".env"), "utf-8");
   for (const line of raw.split("\n")) {
