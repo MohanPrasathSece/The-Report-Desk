@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getLeadCount } from "./_lib/leadStorage";
+import { getLeadCount } from "./_lib/leadStorage.js";
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   try {

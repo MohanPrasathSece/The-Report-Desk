@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { formatFullPhoneNumber } from "./_lib/phoneValidation";
-import { incrementLeadCount } from "./_lib/leadStorage";
+import { formatFullPhoneNumber } from "./_lib/phoneValidation.js";
+import { incrementLeadCount } from "./_lib/leadStorage.js";
 
 declare const fetch: any;
 
